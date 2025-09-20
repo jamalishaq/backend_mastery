@@ -1,4 +1,8 @@
-import { userSchema, taskSchema } from "../config/inputSchema.js";
+import {
+  userSchema,
+  taskSchema,
+  routeIdSchema,
+} from "../config/inputSchema.js";
 import { ValidationError } from "../utils/AppError.js";
 
 const formatJoiError = (error) => {
@@ -24,7 +28,20 @@ export const validateTask = (req, res, next) => {
 
   if (error) {
     const details = formatJoiError(error);
-    throw new ValidationError(details);
+    throw new ValidationError("Validation failed", details);
+  } else {
+    next();
+  }
+};
+
+export const validateRouteId = (req, res, next) => {
+  const { id } = req.params;
+  console.log(req.params);
+  const { error } = routeIdSchema.validate(id);
+
+  if (error) {
+    const details = formatJoiError(error);
+    throw new ValidationError("Validation failed", details);
   } else {
     next();
   }

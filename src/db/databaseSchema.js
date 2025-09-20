@@ -9,12 +9,16 @@ export const user = pgTable(
     email: text().notNull().unique(),
     password: text(),
   },
-  (table) => [check("passwordLengthCheck", sql`char_length(${table.password}) >= 8`)]
+  (table) => [
+    check("passwordLengthCheck", sql`char_length(${table.password}) >= 8`),
+  ]
 );
 
 export const task = pgTable("task", {
-    id: serial().primaryKey(),
-    title: text().notNull(),
-    description: text().notNull(),
-    user_id: integer().references(() => user.id).notNull()
+  id: serial().primaryKey(),
+  title: text().notNull(),
+  description: text().notNull(),
+  user_id: integer()
+    .references(() => user.id)
+    .notNull(),
 });
