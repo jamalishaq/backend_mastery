@@ -10,9 +10,11 @@ import {
   getTasks,
   updateTask,
 } from "../controllers/taskControllers.js";
+import { authenticate } from "../middlewares/auth.js";
 
 const taskRouter = express.Router();
 
+taskRouter.use(authenticate);
 taskRouter.route("/").post(validateTask, createTask).get(getTasks);
 
 taskRouter

@@ -1,9 +1,11 @@
 import express from "express";
 import { validateRouteId, validateUser } from "../middlewares/inputValidator.js";
 import { createUser, deleteUser, getSingleUser, getUsers, updateUser } from "../controllers/userControllers.js";
+import { authenticate } from "../middlewares/auth.js";
 
 const userRouter = express.Router();
 
+userRouter.use(authenticate);
 userRouter.route("/")
     .post(validateUser, createUser)
     .get(getUsers)

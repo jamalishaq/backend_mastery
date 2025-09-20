@@ -13,3 +13,8 @@ export const taskSchema = Joi.object({
 });
 
 export const routeIdSchema = Joi.number().integer().required();
+
+export const loginCredentialsSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(8).required(),
+});
