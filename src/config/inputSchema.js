@@ -4,6 +4,7 @@ export const userSchema = Joi.object({
   username: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.string().min(8).required(),
+  role: Joi.string().required(),
 });
 
 export const taskSchema = Joi.object({

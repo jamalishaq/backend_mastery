@@ -10,17 +10,17 @@ import {
   getTasks,
   updateTask,
 } from "../controllers/taskControllers.js";
-import { authenticate } from "../middlewares/auth.js";
+import { authenticate, verifyRole } from "../middlewares/auth.js";
 
 const taskRouter = express.Router();
 
 taskRouter.use(authenticate);
-taskRouter.route("/").post(validateTask, createTask).get(getTasks);
+taskRouter.route("/").post(verifyRole(['admin']), validateTask, createTask).get(getTasks);
 
 taskRouter
   .route("/:id")
   .get(validateRouteId, getSingleTask)
   .patch(validateRouteId, updateTask)
-  .delete(validateRouteId, deleteTask);
+  .delete(verifyRole(['admin']), validateRouteId, deleteTask);
 
 export default taskRouter;

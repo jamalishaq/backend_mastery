@@ -1,5 +1,7 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, serial, check, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, check, integer, pgEnum } from "drizzle-orm/pg-core";
+
+export const roleEnum = pgEnum("role", ["admin", "member"]);
 
 export const user = pgTable(
   "user",
@@ -8,6 +10,7 @@ export const user = pgTable(
     username: text().notNull(),
     email: text().notNull().unique(),
     password: text(),
+    role: roleEnum().notNull(),
   },
   (table) => [
     check("passwordLengthCheck", sql`char_length(${table.password}) >= 8`),

@@ -1,4 +1,4 @@
-require("dotenv").config()
+require("dotenv").config({quiet: true})
 import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({

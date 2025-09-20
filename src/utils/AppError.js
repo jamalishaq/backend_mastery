@@ -24,3 +24,9 @@ export class AuthenticationError extends AppError {
         super(message, 401, details, "AuthenticationError")
     }
 }
+
+export class AuthorizationError extends AppError {
+    constructor(message, details = null) {
+        super(message, 403, details, "AuthorizationError")
+    }
+}
