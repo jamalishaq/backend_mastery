@@ -9,10 +9,9 @@ export const generateJWT = (payload, exp) => {
             if (err) {
                 reject(new AuthenticationError("Error authenticating"));
             } else {
-                resolve(token)
+                resolve(token);
             }
         });
-
     });
 };
 
@@ -20,7 +19,7 @@ export const verifyJWT = (token) => {
     return new Promise((resolve, reject) => {
         jwt.verify(token, process.env.SECRET, (err, decoded) => {
             if (err) {
-                reject (new AuthenticationError("Error authenticating"));
+                reject(new AuthenticationError("Error authenticating"));
             } else {
                 resolve(decoded);
             }
