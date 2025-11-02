@@ -37,7 +37,6 @@ export const validateTask = (req, res, next) => {
 
 export const validateRouteId = (req, res, next) => {
   const { id } = req.params;
-  console.log(req.params);
   const { error } = routeIdSchema.validate(id);
 
   if (error) {

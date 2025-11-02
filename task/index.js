@@ -10,8 +10,8 @@ const startServer = async () => {
     const PORT = process.env.PORT;
     const privateKey = fs.readFileSync("server.key");
     const certificate = fs.readFileSync("server.cert");
+    const credentials = {key: privateKey, cert: certificate};
 
-    const credentials = {key: privateKey, cert: certificate}
     const server = https.createServer(credentials, app)
 
     try {
